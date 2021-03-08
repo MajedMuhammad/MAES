@@ -1,0 +1,12 @@
+{
+  "name": "MAES",
+  "displayName": "MAES",
+  "expo": {
+    "name": "MAES",
+    "slug": "MAES",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
