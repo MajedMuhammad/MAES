@@ -15,7 +15,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.text}>
                 <Text style={styles.disclaimer}>
                     Disclaimer: </Text>
-                This app is in the implementation & testing phases and is <Text style={styles.disclaimer}>not</Text> usable at this time.
+                This app is in implementation & testing phases and is <Text style={styles.disclaimer}>not</Text> serviceable yet.
             </Text>
 
             <View style={styles.separator} />
