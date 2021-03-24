@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
+import React, { useContext } from 'react';
+import { StyleSheet } from 'react-native';
+import { Button, Input, Divider } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
-import { Input, Divider } from 'react-native-elements';
+import { SafeAreaView } from 'react-navigation';
 
 function RenderElement({ email, fName, lName, gender, pNumber, city, dob, navigate }) {
     return (
         <>
+            <Spacer />
             <Divider />
 
             <Input
@@ -73,18 +74,17 @@ function RenderElement({ email, fName, lName, gender, pNumber, city, dob, naviga
 }
 
 const ProfileScreen = ({ navigation }) => {
-    const { logout } = useContext(AuthContext);
-    const [fName, setFName] = useState('`');
+    const { logout, email, fName, lName, gender, pNumber, city, dob } = useContext(AuthContext);
     return (
-        <View>
-            { fName != '' ? <RenderElement email="test@test.com" fName="Majed" lName="Althaqafi" gender="Male" pNumber="0560000" city="Taif" dob="01/01/1990" navigate={navigation.navigate} /> : <Spacer>
-                <Button title="Initialize your profile" onPress={() => navigation.navigate("ChangingProfile")} />
+        <SafeAreaView forceInset={{ top: 50 }}>
+            { fName != null ? <RenderElement email={email} fName={fName} lName={lName} gender={gender} pNumber={pNumber} city={city} dob={dob} navigate={navigation.push} /> : <Spacer>
+                <Button title="Initialize your profile" onPress={() => navigation.push("ChangingProfile")} />
             </Spacer>}
 
             <Spacer>
                 <Button title="Log Out" onPress={logout} />
             </Spacer>
-        </View>
+        </SafeAreaView>
     );
 };
 

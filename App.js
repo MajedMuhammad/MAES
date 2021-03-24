@@ -55,6 +55,9 @@ const switchNavigator = createSwitchNavigator({
       screen: createStackNavigator({
         Profile: ProfileScreen,
         ChangingProfile: ChangingProfileScreen
+      }, {
+        headerMode: 'none',
+        initialRouteName: 'ChangingProfile',
       }),
       navigationOptions: {
         tabBarLabel: 'Profile',
@@ -67,6 +70,7 @@ const switchNavigator = createSwitchNavigator({
     tabBarOptions: {
       safeAreaInset: { bottom: 'always' },
     },
+    initialRouteName: 'profiling',
   })
 }, {
   initialRouteName: 'mainFlow'
