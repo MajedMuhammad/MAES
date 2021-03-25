@@ -9,17 +9,19 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
+    "@react-native-community/datetimepicker": "3.0.4",
     "@react-native-community/masked-view": "0.1.10",
     "axios": "^0.21.1",
     "expo": "^40.0.1",
-    "expo-splash-screen": "~0.8.0",
+    "expo-splash-screen": "~0.8.1",
     "expo-status-bar": "~1.0.3",
-    "expo-updates": "~0.4.0",
+    "expo-updates": "~0.4.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "~0.63.4",
+    "react-native": "0.63.4",
     "react-native-elements": "^3.3.2",
     "react-native-gesture-handler": "~1.8.0",
+    "react-native-modal-datetime-picker": "^9.2.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-safe-area-context": "3.1.9",
     "react-native-screens": "~2.15.2",
@@ -32,7 +34,7 @@
     "react-navigation-tabs": "^2.11.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
+    "@babel/core": "^7.9.6",
     "babel-jest": "~25.2.6",
     "jest": "~25.2.6",
     "react-test-renderer": "~16.13.1"

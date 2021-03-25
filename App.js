@@ -22,6 +22,8 @@ const switchNavigator = createSwitchNavigator({
     Login: LoginScreen,
   }, {
     initialRouteName: 'Login'
+  }, {
+    initialRouteName: 'ResolveAuth'
   }),
   mainFlow: createBottomTabNavigator({
     Home: {
@@ -57,7 +59,7 @@ const switchNavigator = createSwitchNavigator({
         ChangingProfile: ChangingProfileScreen
       }, {
         headerMode: 'none',
-        initialRouteName: 'ChangingProfile',
+        initialRouteName: 'Profile',
       }),
       navigationOptions: {
         tabBarLabel: 'Profile',
@@ -70,10 +72,10 @@ const switchNavigator = createSwitchNavigator({
     tabBarOptions: {
       safeAreaInset: { bottom: 'always' },
     },
-    initialRouteName: 'profiling',
+    initialRouteName: 'Home',
   })
 }, {
-  initialRouteName: 'mainFlow'
+  initialRouteName: 'loginFlow'
 });
 
 const App = createAppContainer(switchNavigator);

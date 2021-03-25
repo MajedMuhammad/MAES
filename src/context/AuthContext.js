@@ -12,7 +12,14 @@ const authReducer = (state, action) => {
         case 'clear_error_message':
             return { ...state, errorMessage: '' };
         case 'profile':
-            return { ...state, email: action.payload.email, fName: action.payload.fName, lName: action.payload.lName, gender: action.payload.gender, pNumber: action.payload.pNumber, city: action.payload.city, dob: action.payload.dob };
+            state.email = action.payload.email;
+            state.fName = action.payload.fName;
+            state.lName = action.payload.lName;
+            state.gender = action.payload.gender;
+            state.pNumber = action.payload.pNumber;
+            state.city = action.payload.city;
+            state.dob = action.payload.dob;
+            return { ...state };
         case 'logout':
             return { token: null, errorMessage: '', email: null, fName: null, lName: null, gender: null, pNumber: null, city: null, dob: null };
         default:
@@ -50,7 +57,6 @@ const signup = dispatch => async ({ email, password }) => {
 const login = dispatch => async ({ email, password }) => {
     try {
         const response = await userApi.post('/login', { email, password });
-        console.log(response.data);
         await AsyncStorage.setItem('token', response.data.token);
         dispatch({ type: 'login', payload: response.data.token });
 
@@ -67,12 +73,7 @@ const login = dispatch => async ({ email, password }) => {
 
 const profile = dispatch => async ({ fName, lName, gender, pNumber, city, dob }) => {
     try {
-        const response = await userApi.put('/profile', { fName, lName, gender, pNumber, city, dob }, {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-        });
+        const response = await userApi.put('/profile', { fName, lName, gender, pNumber, city, dob });
         await AsyncStorage.setItem('email', response.data.email);
         await AsyncStorage.setItem('fName', response.data.fName);
         await AsyncStorage.setItem('lName', response.data.lName);
@@ -82,10 +83,11 @@ const profile = dispatch => async ({ fName, lName, gender, pNumber, city, dob })
         await AsyncStorage.setItem('dob', response.data.dob);
         dispatch({ type: 'profile', payload: response.data });
 
-        navigate('mainFlow');
+        navigate('Profile');
 
     } catch (err) {
-        dispatch({ type: 'add_error', payload: 'Something went wrong with sign up' });
+        dispatch({ type: 'add_error', payload: 'Something went wrong with assign profile up' });
+        console.log(err);
     }
 };
 

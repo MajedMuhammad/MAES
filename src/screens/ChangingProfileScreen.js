@@ -7,6 +7,7 @@ import RadioForm from 'react-native-simple-radio-button';
 //import { DatePicker } from "react-native-common-date-picker";
 import Spacer from '../components/Spacer';
 //import ModalDatePicker from 'react-native-datepicker-modal';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const ChangingProfileScreen = ({ navigation }) => {
     const [fName, setFName] = useState('');
@@ -16,15 +17,24 @@ const ChangingProfileScreen = ({ navigation }) => {
     const [city, setCity] = useState('');
     const [dob, setDob] = useState(new Date());
     const { profile } = useContext(AuthContext);
-    console.log(dob)
-
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const showDatePicker = () => {
+        setDatePickerVisibility(true);
+    };
+    const hideDatePicker = () => {
+        setDatePickerVisibility(false);
+    };
+    const handleConfirm = (date) => {
+        setDob(date);
+        hideDatePicker();
+    };
     useEffect(() => {
         LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <ScrollView nestedScrollEnabled={true} contentInsetAdjustmentBehavior="automatic">
+            <ScrollView>
 
                 <Spacer />
                 <Divider />
@@ -77,17 +87,15 @@ const ChangingProfileScreen = ({ navigation }) => {
 
                 <Divider />
 
-                {/* <ModalDatePicker
-                    style={styles.container}
-                    renderDate={({ year, month, day, date }) => {
-                        if (!date) {
-                            return <Text>Date of birth</Text>
-                        }
-
-                        const dateStr = `${day}-${month}-${year}`
-                        return <Text>{dateStr}</Text>
-                    }}
-                /> */}
+                <View>
+                    <Button title="Date of Birth" onPress={showDatePicker} />
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
+                </View>
 
                 <Divider />
                 <Spacer />

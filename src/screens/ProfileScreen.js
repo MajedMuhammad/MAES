@@ -74,10 +74,10 @@ function RenderElement({ email, fName, lName, gender, pNumber, city, dob, naviga
 }
 
 const ProfileScreen = ({ navigation }) => {
-    const { logout, email, fName, lName, gender, pNumber, city, dob } = useContext(AuthContext);
+    const { state, logout } = useContext(AuthContext);
     return (
         <SafeAreaView forceInset={{ top: 50 }}>
-            { fName != null ? <RenderElement email={email} fName={fName} lName={lName} gender={gender} pNumber={pNumber} city={city} dob={dob} navigate={navigation.push} /> : <Spacer>
+            { state.fName != null ? <RenderElement email={state.email} fName={state.fName} lName={state.lName} gender={state.gender} pNumber={state.pNumber} city={state.city} dob={state.dob} navigate={navigation.push} /> : <Spacer>
                 <Button title="Initialize your profile" onPress={() => navigation.push("ChangingProfile")} />
             </Spacer>}
 
