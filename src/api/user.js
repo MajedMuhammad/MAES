@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Default config options
 const defaultOptions = {
-    baseURL: 'http://e20e70c599d8.ngrok.io',
+    baseURL: 'http://a62f18a5f61c.ngrok.io',
     headers: {
         'Content-Type': 'application/json',
     },

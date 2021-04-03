@@ -1,18 +1,17 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { NavigationEvents } from 'react-navigation';
 import { Context as AuthContext } from '../context/AuthContext'
 import AuthForm from '../components/AuthForm'
 import NavLink from '../components/NavLink';
 
 const LoginScreen = ({ navigation }) => {
     const { state, login, clearErrorMessage } = useContext(AuthContext);
-
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', clearErrorMessage);
+        return unsubscribe;
+    }, [navigation]);
     return (
         <View style={styles.container}>
-            <NavigationEvents
-                onWillBlur={clearErrorMessage}
-            />
             <AuthForm
                 headerText="Login"
                 errorMessage={state.errorMessage}
@@ -25,12 +24,6 @@ const LoginScreen = ({ navigation }) => {
             />
         </View>
     );
-};
-
-LoginScreen.navigationOptions = () => {
-    return {
-        headerShown: false
-    };
 };
 
 const styles = StyleSheet.create({

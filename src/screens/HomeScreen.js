@@ -1,6 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
 import { FontAwesome5, MaterialIcons, AntDesign } from 'react-native-vector-icons';
 
@@ -23,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
             <View style={styles.justifyIcons}>
                 <TouchableOpacity onPress={() => navigation.navigate("Diagnosis")}>
                     <View style={styles.iconsBorder}>
-                        <FontAwesome5 name="diagnoses" color="#007ef5" size={64} style={styles.icons} solid />
+                        <FontAwesome5 name="diagnoses" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
                             Diagnosis
                     </Text>
@@ -32,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
 
                 <TouchableOpacity onPress={() => navigation.navigate("Updating")}>
                     <View style={styles.iconsBorder}>
-                        <MaterialIcons name="update" color="#007ef5" size={64} style={styles.icons} solid />
+                        <MaterialIcons name="update" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
                             Updates
                     </Text>
@@ -41,9 +40,9 @@ const HomeScreen = ({ navigation }) => {
             </View>
 
             <View style={styles.justifyIcons}>
-                <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+                <TouchableOpacity onPress={() => navigation.navigate("profiling", { screen: 'Profile' })}>
                     <View style={styles.iconsBorder}>
-                        <AntDesign name="profile" color="#007ef5" size={64} style={styles.icons} solid />
+                        <AntDesign name="profile" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
                             Profile
                     </Text>
@@ -52,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
 
                 <TouchableOpacity>
                     <View style={styles.iconsBorder}>
-                        <AntDesign name="exclamationcircleo" color="#007ef5" size={64} style={styles.icons} solid />
+                        <AntDesign name="exclamationcircleo" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
                             About
                     </Text>
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
         width: 140,
         height: 140,
         borderWidth: 2,
-        borderColor: '#007ef5',
+        borderColor: 'rgb(0, 122, 255)',
         borderRadius: 10,
         alignSelf: 'center',
         justifyContent: 'center',

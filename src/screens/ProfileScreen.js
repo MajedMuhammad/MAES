@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Button, Input, Divider } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import { Context as AuthContext } from '../context/AuthContext';
-import { SafeAreaView } from 'react-navigation';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function RenderElement({ email, fName, lName, gender, pNumber, city, dob, navigate }) {
     return (
@@ -60,7 +60,7 @@ function RenderElement({ email, fName, lName, gender, pNumber, city, dob, naviga
             <Divider />
 
             <Input
-                label="DoB"
+                label="Date of Birth"
                 placeholder={dob}
                 disabled
             />
@@ -77,8 +77,8 @@ const ProfileScreen = ({ navigation }) => {
     const { state, logout } = useContext(AuthContext);
     return (
         <SafeAreaView forceInset={{ top: 50 }}>
-            { state.fName != null ? <RenderElement email={state.email} fName={state.fName} lName={state.lName} gender={state.gender} pNumber={state.pNumber} city={state.city} dob={state.dob} navigate={navigation.push} /> : <Spacer>
-                <Button title="Initialize your profile" onPress={() => navigation.push("ChangingProfile")} />
+            { state.fName != null ? <RenderElement email={state.email} fName={state.fName} lName={state.lName} gender={state.gender} pNumber={state.pNumber} city={state.city} dob={state.dob} navigate={navigation.navigate} /> : <Spacer>
+                <Button title="Initialize your profile" onPress={() => navigation.navigate("ChangingProfile")} />
             </Spacer>}
 
             <Spacer>
