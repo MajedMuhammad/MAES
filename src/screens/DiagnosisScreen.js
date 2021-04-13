@@ -1,18 +1,25 @@
-import React, { useState, useEffect, useRef } from "react";
-import socketIOClient from "socket.io-client";
+import React, { useState, useContext, useCallback, useEffect } from 'react';
+import { SocketContext } from '../context/Socket';
 import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 
-const ENDPOINT = "http://159.89.13.198:4001";
 
 const DiagnosisScreen = () => {
     const [response, setResponse] = useState("");
-    let socket = useRef({});
+    const socket = useContext(SocketContext);
+
+    const sendYes = useCallback(() => {
+        socket.emit("FromClient", 'yes');
+    }, []);
+
+    const sendNo = useCallback(() => {
+        socket.emit("FromClient", 'no');
+    }, []);
 
     useEffect(() => {
-        socket = socketIOClient(ENDPOINT);
-    }, [])
+        socket.emit("PyRun");
+    }, []);
 
     useEffect(() => {
         socket.on("FromAPI", res => {
@@ -29,13 +36,9 @@ const DiagnosisScreen = () => {
                     {((response.indexOf("?") != -1) && response != "")
                         ?
                         <>
-                            <Button title={"YES"} style={styles.buttonStyle} onPress={() => {
-                                socket.emit("FromClient", 'yes');
-                            }} />
+                            <Button title={"YES"} style={styles.buttonStyle} onPress={sendYes} />
 
-                            <Button title={"NO"} style={styles.buttonStyle} onPress={() => {
-                                socket.emit("FromClient", 'no');
-                            }} />
+                            <Button title={"NO"} style={styles.buttonStyle} onPress={sendNo} />
                         </>
                         :
                         <Text style={styles.takeCareStyle}>Take Care!</Text>
