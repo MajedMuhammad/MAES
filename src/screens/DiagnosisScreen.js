@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import socketIOClient from "socket.io-client";
 import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 
 const ENDPOINT = "http://159.89.13.198:4001";
-const socket = socketIOClient(ENDPOINT);
-
-
 
 const DiagnosisScreen = () => {
     const [response, setResponse] = useState("");
+    let socket = useRef({});
+
+    useEffect(() => {
+        socket = socketIOClient(ENDPOINT);
+    }, [])
 
     useEffect(() => {
         socket.on("FromAPI", res => {
+            console.log(res)
             setResponse(res);
         });
     }, [response]);

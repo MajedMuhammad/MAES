@@ -9,7 +9,7 @@ const mainFlow = createBottomTabNavigator();
 
 const mainFlowNavigator = () => {
     return (
-        <mainFlow.Navigator initialRouteName="Diagnosis" >
+        <mainFlow.Navigator initialRouteName="Home" >
 
             <mainFlow.Screen name="Home" component={HomeScreen} options={{
                 tabBarLabel: 'Home',
