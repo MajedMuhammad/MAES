@@ -4,10 +4,16 @@ import { View, StyleSheet } from 'react-native';
 import { Text, Button } from 'react-native-elements';
 import Spacer from '../components/Spacer';
 
-
 const DiagnosisScreen = () => {
     const [response, setResponse] = useState("");
+    const [flag, setFlag] = useState(0);
     const socket = useContext(SocketContext);
+
+    const again = useCallback(() => {
+        socket.disconnect();
+        console.log("Disconnected Successfully.");
+        setFlag(flag + 1);
+    }, [flag]);
 
     const sendYes = useCallback(() => {
         socket.emit("FromClient", 'yes');
@@ -18,15 +24,16 @@ const DiagnosisScreen = () => {
     }, []);
 
     useEffect(() => {
-        socket.emit("PyRun");
-    }, []);
+        socket.connect();
+        console.log("Connected Successfully.")
+    }, [flag]);
 
     useEffect(() => {
         socket.on("FromAPI", res => {
             console.log(res)
             setResponse(res);
         });
-    }, [response]);
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -41,7 +48,11 @@ const DiagnosisScreen = () => {
                             <Button title={"NO"} style={styles.buttonStyle} onPress={sendNo} />
                         </>
                         :
-                        <Text style={styles.takeCareStyle}>Take Care!</Text>
+                        <View style={{ flex: 1, alignItems: 'center' }}>
+                            <Text style={styles.takeCareStyle}>Take Care!</Text>
+                            <Spacer />
+                            <Button title={"Again"} style={styles.buttonStyle} onPress={again} />
+                        </View>
                     }
 
                 </View>
@@ -73,7 +84,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     takeCareStyle: {
-        flex: 1,
         fontSize: 24,
         color: 'rgb(0, 122, 255)',
         textAlign: 'center',
