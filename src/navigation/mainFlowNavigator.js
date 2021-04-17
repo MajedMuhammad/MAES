@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
+import homeNavigator from './homeNavigator';
 import DiagnosisScreen from '../screens/DiagnosisScreen';
 import profileNavigator from './profileNavigator';
 import { Ionicons, FontAwesome5, AntDesign } from 'react-native-vector-icons';
@@ -9,9 +9,9 @@ const mainFlow = createBottomTabNavigator();
 
 const mainFlowNavigator = () => {
     return (
-        <mainFlow.Navigator initialRouteName="Home" >
+        <mainFlow.Navigator initialRouteName="home" >
 
-            <mainFlow.Screen name="Home" component={HomeScreen} options={{
+            <mainFlow.Screen name="home" component={homeNavigator} options={{
                 tabBarLabel: 'Home',
                 tabBarIcon: (tintColor) => (
                     <Ionicons name="ios-home" color={tintColor.color} size={25} />

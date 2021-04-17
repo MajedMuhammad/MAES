@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context as AuthContext } from '../context/AuthContext';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text } from 'react-native-elements';
-import { FontAwesome5, MaterialIcons, AntDesign } from 'react-native-vector-icons';
+import { FontAwesome5, Entypo, AntDesign } from 'react-native-vector-icons';
 
 const HomeScreen = ({ navigation }) => {
+    const { state } = useContext(AuthContext);
     return (
         <View style={styles.container}>
 
             <Text style={styles.welcoming}>
-                You are welcome
+                {state.lName}, you are welcome!
             </Text>
 
             <Text style={styles.text}>
@@ -29,11 +31,11 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => navigation.navigate("Updating")}>
+                <TouchableOpacity onPress={() => navigation.push('Instruction')}>
                     <View style={styles.iconsBorder}>
-                        <MaterialIcons name="update" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
+                        <Entypo name="open-book" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
-                            Updates
+                            Instructions
                     </Text>
                     </View>
                 </TouchableOpacity>
@@ -49,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.push('About')}>
                     <View style={styles.iconsBorder}>
                         <AntDesign name="exclamationcircleo" color="rgb(0, 122, 255)" size={64} style={styles.icons} solid />
                         <Text style={styles.iconsText}>
