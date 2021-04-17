@@ -31,7 +31,11 @@ const DiagnosisScreen = () => {
     useEffect(() => {
         socket.on("FromAPI", res => {
             console.log(res)
-            setResponse(res);
+            if (res.indexOf('|') === -1) {
+                setResponse(res);
+            } else {
+                setResponse((res.slice(0, res.indexOf('|'))) + '.\n' + (res.slice((res.indexOf('|') + 1))) + '.');
+            }
         });
     }, []);
 
